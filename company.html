@@ -4,27 +4,83 @@
     <meta charset="UTF-8">
     <title>OptoVizor — решения для оптовой торговли и интеграций</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="OptoVizor — разработка сервисов и интеграций для оптовых компаний и поставщиков. Интеграция с МойСклад, каталог поставщиков, ИИ-поиск.">
+    <meta name="description" content="OptoVizor — коммерческая B2B платформа: каталог поставщиков, интеграция с МойСклад, ИИ-поиск товаров.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ---- СТИЛИ САЙТА (СОКРАЩЕНО, ОСТАВЛЕНО БЕЗ ИЗМЕНЕНИЙ) ---- */
         :root {
-            --bg: #050816; --bg-soft: #0b1020; --accent: #3f8cff;
-            --accent-soft: rgba(63,140,255,0.12); --accent-strong: #4aa8ff;
-            --text: #f5f7ff; --text-muted: #9aa4c6; --card-bg: #0f172a;
+            --bg: #050816;
+            --bg-soft: #0b1020;
+            --accent: #3f8cff;
+            --accent-soft: rgba(63,140,255,0.12);
+            --accent-strong: #4aa8ff;
+            --text: #f5f7ff;
+            --text-muted: #9aa4c6;
+            --card-bg: #0f172a;
             --border: rgba(148,163,184,0.18);
         }
-        body { margin:0; background:#020617; color:var(--text); font-family:'Inter',sans-serif; }
+
+        body {
+            margin:0;
+            background:#020617;
+            color:var(--text);
+            font-family:'Inter',sans-serif;
+        }
+
         a { color:inherit; text-decoration:none; }
-        header { position:sticky; top:0; backdrop-filter:blur(18px); background:rgba(2,6,23,0.9); border-bottom:1px solid rgba(148,163,184,0.12); }
-        .nav { max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; justify-content:space-between; }
-        main { max-width:1100px; margin:0 auto; padding:40px 20px; }
-        h1,h2 { color:#fff; }
-        .section { margin-top:50px; padding:30px; border-radius:16px; background:rgba(15,23,42,0.6); border:1px solid rgba(148,163,184,0.15); }
-        ul li{ margin-bottom:10px; line-height:1.6; }
+
+        header {
+            position:sticky;
+            top:0;
+            backdrop-filter:blur(18px);
+            background:rgba(2,6,23,0.9);
+            border-bottom:1px solid rgba(148,163,184,0.12);
+        }
+
+        .nav {
+            max-width:1100px;
+            margin:0 auto;
+            padding:14px 20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        main {
+            max-width:1100px;
+            margin:0 auto;
+            padding:40px 20px;
+        }
+
+        h1, h2, h3 {
+            color:#fff;
+        }
+
+        .section {
+            margin-top:50px;
+            padding:30px;
+            border-radius:16px;
+            background:rgba(15,23,42,0.6);
+            border:1px solid rgba(148,163,184,0.15);
+        }
+
+        ul li {
+            margin-bottom:10px;
+            line-height:1.6;
+        }
+
+        footer {
+            padding:20px;
+            text-align:center;
+            color:#9aa4c6;
+            margin-top:50px;
+        }
+
+        hr {
+            opacity:0.25;
+        }
     </style>
 </head>
 
@@ -39,66 +95,72 @@
 <main>
     <h1>OptoVizor — интеграции, сервисы и каталог поставщиков</h1>
 
+    <!-- О СЕРВИСЕ -->
     <div class="section">
         <h2>О сервисе OptoVizor</h2>
         <p>
-            <strong>OptoVizor</strong> — это коммерческая B2B-платформа, которая объединяет поставщиков 
-            и розничные компании. Поставщики размещают свои каталоги, обновляют ассортимент, используют 
-            инструменты продвижения и получают аналитику. Магазины получают быстрый доступ к товарам, 
-            ценам, наличию и интеллектуальному поиску на базе ИИ.
+            <strong>OptoVizor</strong> — это коммерческая B2B-платформа, объединяющая поставщиков и 
+            розничные компании. Поставщики размещают свои каталоги, обновляют ассортимент, используют 
+            инструменты продвижения и получают аналитику.
+        </p>
+        <p>
+            Магазины получают быстрый доступ к полному каталогу оптовиков, актуальным ценам, наличию 
+            и могут использовать интеллектуальный поиск по товарам на базе ИИ.
         </p>
     </div>
 
+    <!-- КОММЕРЧЕСКАЯ МОДЕЛЬ -->
     <div class="section">
         <h2>Коммерческая модель</h2>
         <p>
-            OptoVizor является коммерческим сервисом. Поставщики подключаются по подписке — размещают каталог, 
-            обновляют прайс-лист, получают аналитику и инструменты продвижения.
+            OptoVizor является <strong>коммерческим сервисом</strong>. Поставщики подключаются по 
+            подписке, размещают каталог, обновляют прайс-листы, используют аналитику и инструменты 
+            продвижения.
         </p>
         <p>
-            Интеграция с <strong>МойСклад</strong> предоставляется бесплатно пользователям, имеющим доступ 
-            к платформе OptoVizor. Интеграция не изменяет данные МойСклад и работает только в режиме чтения.
+            Интеграция с <strong>МойСклад</strong> предоставляется пользователям МойСклад бесплатно — как часть 
+            платформы OptoVizor. Интеграция работает только в режиме чтения и не изменяет данные.
         </p>
     </div>
 
+    <!-- ИНСТРУКЦИЯ -->
     <div class="section">
         <h2>Инструкция по подключению OptoVizor к МойСклад</h2>
 
         <h3>1. Установка приложения</h3>
         <p>
-            В каталоге приложений МойСклад нажмите <strong>«Установить»</strong>.  
-            Появится окно с запросом прав доступа. Интеграция использует только безопасный режим чтения.
+            В каталоге приложений МойСклад нажмите кнопку <strong>«Установить»</strong>.  
+            Появится окно с запросом прав доступа. ОптoVizor использует только безопасный режим чтения.
         </p>
 
         <h3>2. Подтверждение прав</h3>
         <p>
-            Нажмите кнопку <strong>«Разрешить»</strong>.  
-            Это свяжет ваш аккаунт МойСклад с платформой OptoVizor.
+            Нажмите <strong>«Разрешить»</strong>. Это свяжет ваш аккаунт МойСклад с платформой OptoVizor.
         </p>
 
-        <h3>3. Новый раздел OptoVizor в меню МойСклад</h3>
+        <h3>3. Новый раздел в меню</h3>
         <p>
-            После установки в боковом меню появится раздел <strong>«OptoVizor»</strong>.  
-            В нём откроется каталог поставщиков.
+            После установки в боковом меню появится раздел <strong>«OptoVizor»</strong>, где откроется каталог поставщиков.
         </p>
 
         <h3>4. Работа с каталогом</h3>
         <p>
-            Вы сможете искать товары через ИИ, смотреть цены, наличие, фильтровать предложения 
-            и просматривать каталоги поставщиков прямо внутри МойСклад.
+            Просматривайте товары поставщиков, используйте ИИ-поиск, фильтры и сравнивайте предложения. 
+            Интеграция работает только в режиме чтения.
         </p>
 
-        <hr style="opacity:0.2; margin:25px 0;">
+        <hr>
 
         <h3>Дополнительная информация</h3>
         <ul>
             <li>Telegram-бот используется только поставщиками для подтверждения каталога.</li>
-            <li>Пользователям МойСклад бот <strong>не требуется</strong>.</li>
-            <li>Интеграция работает только в режиме чтения, без изменений данных.</li>
-            <li>Каталоги поставщиков обновляются внутри OptoVizor автоматически.</li>
+            <li>Пользователи МойСклад бот <strong>не используют</strong>.</li>
+            <li>Интеграция ничего не изменяет в данных МойСклад.</li>
+            <li>Каталоги поставщиков обновляются автоматически внутри OptoVizor.</li>
         </ul>
     </div>
 
+    <!-- КОНТАКТЫ -->
     <div class="section">
         <h2>Контакты</h2>
         <p>Email для связи: <strong>shader0630@gmail.com</strong></p>
@@ -106,5 +168,9 @@
 
 </main>
 
-<footer style="padding:20px; text-align:center; color:#9aa4c6;">
+<footer>
     OptoVizor · Коммерческая B2B-платформа · 2025
+</footer>
+
+</body>
+</html>
