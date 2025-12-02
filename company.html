@@ -1,176 +1,635 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>OptoVizor — решения для оптовой торговли и интеграций</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="OptoVizor — коммерческая B2B платформа: каталог поставщиков, интеграция с МойСклад, ИИ-поиск товаров.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg: #050816;
-            --bg-soft: #0b1020;
-            --accent: #3f8cff;
-            --accent-soft: rgba(63,140,255,0.12);
-            --accent-strong: #4aa8ff;
-            --text: #f5f7ff;
-            --text-muted: #9aa4c6;
-            --card-bg: #0f172a;
-            --border: rgba(148,163,184,0.18);
-        }
+  <meta charset="UTF-8" />
+  <title>OptoVizor — интеграция с МойСклад и каталог поставщиков</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="OptoVizor — коммерческая B2B-платформа: каталог поставщиков, ИИ-поиск товаров и интеграция с МойСклад в режиме чтения." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #020617;
+      --card: #0b1220;
+      --card-soft: #0f172a;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.14);
+      --accent-strong: #0ea5e9;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border: rgba(148,163,184,0.2);
+      --danger: #f97373;
+    }
 
-        body {
-            margin:0;
-            background:#020617;
-            color:var(--text);
-            font-family:'Inter',sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        a { color:inherit; text-decoration:none; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #020617 100%);
+      color: var(--text);
+    }
 
-        header {
-            position:sticky;
-            top:0;
-            backdrop-filter:blur(18px);
-            background:rgba(2,6,23,0.9);
-            border-bottom:1px solid rgba(148,163,184,0.12);
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .nav {
-            max-width:1100px;
-            margin:0 auto;
-            padding:14px 20px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(15,23,42,0.97), rgba(15,23,42,0.94));
+      border-bottom: 1px solid rgba(148,163,184,0.25);
+    }
 
-        main {
-            max-width:1100px;
-            margin:0 auto;
-            padding:40px 20px;
-        }
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
 
-        h1, h2, h3 {
-            color:#fff;
-        }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .section {
-            margin-top:50px;
-            padding:30px;
-            border-radius:16px;
-            background:rgba(15,23,42,0.6);
-            border:1px solid rgba(148,163,184,0.15);
-        }
+    .logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #38bdf8, #0f172a 60%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #e0f2fe;
+      font-size: 18px;
+      box-shadow: 0 0 24px rgba(56,189,248,0.6);
+    }
 
-        ul li {
-            margin-bottom:10px;
-            line-height:1.6;
-        }
+    .nav-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
-        footer {
-            padding:20px;
-            text-align:center;
-            color:#9aa4c6;
-            margin-top:50px;
-        }
+    .nav-title-main {
+      font-size: 16px;
+      font-weight: 600;
+    }
 
-        hr {
-            opacity:0.25;
-        }
-    </style>
+    .nav-title-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .nav-right {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 26px;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,189,248,0.45);
+      background: rgba(15,23,42,0.9);
+      font-size: 11px;
+      color: #bae6fd;
+      margin-bottom: 16px;
+    }
+
+    .hero-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 16px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.4);
+      color: #cbd5f5;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: default;
+      background: linear-gradient(to right, var(--accent), var(--accent-strong));
+      color: #0f172a;
+      box-shadow: 0 10px 30px rgba(56,189,248,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border-color: rgba(148,163,184,0.5);
+      box-shadow: none;
+    }
+
+    .btn-secondary span {
+      color: var(--accent);
+    }
+
+    .hero-right-card {
+      position: relative;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 65%, #020617 100%);
+      border: 1px solid rgba(148,163,184,0.25);
+      padding: 18px 18px 16px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+      overflow: hidden;
+      min-height: 220px;
+    }
+
+    .hero-right-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .hero-right-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero-right-tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34,197,94,0.4);
+    }
+
+    .hero-step-list {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .hero-step-list li {
+      margin-bottom: 6px;
+    }
+
+    .hero-badge-ai {
+      position: absolute;
+      right: 18px;
+      bottom: 16px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(56,189,248,0.7);
+      color: #e0f2fe;
+    }
+
+    /* COMMON SECTION */
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 32px 0 10px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    /* GRID */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 980px) {
+      .grid-3 {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .grid-3 {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 38px rgba(15,23,42,0.8);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* STEP LIST */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 800px) {
+      .steps {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .step {
+      background: var(--card-soft);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+    }
+
+    .step-num {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-strong);
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .step-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* IMPORTANT INFO */
+    .important {
+      margin-top: 22px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(249,115,115,0.45);
+    }
+
+    .important-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fecaca;
+      margin-bottom: 6px;
+    }
+
+    .important ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .important li {
+      font-size: 13px;
+      color: #fecaca;
+      margin-bottom: 4px;
+    }
+
+    /* CONTACTS */
+    .contacts {
+      margin-top: 26px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contacts a {
+      color: var(--accent);
+    }
+
+    footer {
+      border-top: 1px solid rgba(148,163,184,0.35);
+      padding: 16px 20px 24px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+    }
+  </style>
 </head>
-
 <body>
 <header>
-    <div class="nav">
-        <div><strong>OptoVizor</strong> — интеграции и сервисы</div>
-        <div>Разработчик: shader0630@gmail.com</div>
+  <div class="nav">
+    <div class="nav-left">
+      <div class="logo">O</div>
+      <div class="nav-title">
+        <div class="nav-title-main">OptoVizor</div>
+        <div class="nav-title-sub">интеграции, сервисы и каталог поставщиков</div>
+      </div>
     </div>
+    <div class="nav-right">
+      Разработчик: <strong>ИП Анфуренко А.В.</strong><br/>
+      Контакт: <a href="mailto:shader0630@gmail.com">shader0630@gmail.com</a>
+    </div>
+  </div>
 </header>
 
 <main>
-    <h1>OptoVizor — интеграции, сервисы и каталог поставщиков</h1>
-
-    <!-- О СЕРВИСЕ -->
-    <div class="section">
-        <h2>О сервисе OptoVizor</h2>
-        <p>
-            <strong>OptoVizor</strong> — это коммерческая B2B-платформа, объединяющая поставщиков и 
-            розничные компании. Поставщики размещают свои каталоги, обновляют ассортимент, используют 
-            инструменты продвижения и получают аналитику.
-        </p>
-        <p>
-            Магазины получают быстрый доступ к полному каталогу оптовиков, актуальным ценам, наличию 
-            и могут использовать интеллектуальный поиск по товарам на базе ИИ.
-        </p>
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge">
+        <span>🧩 Интеграция с МойСклад</span>
+        <span>·</span>
+        <span>Каталог поставщиков + ИИ-поиск</span>
+      </div>
+      <h1 class="hero-title">
+        OptoVizor — коммерческая B2B-платформа с интеграцией каталога в МойСклад
+      </h1>
+      <p class="hero-text">
+        Поставщики размещают свои каталоги и обновляют прайс-листы в OptoVizor, а пользователи МойСклад
+        просматривают товары, цены и наличие прямо в интерфейсе учётной системы, используя интеллектуальный поиск.
+      </p>
+      <div class="hero-pills">
+        <div class="pill">Каталог поставщиков</div>
+        <div class="pill">ИИ-поиск по товарам</div>
+        <div class="pill">Режим чтения данных</div>
+        <div class="pill">Коммерческий сервис</div>
+      </div>
+      <div class="hero-cta">
+        <div class="btn">Интеграция входит в платформу OptoVizor</div>
+        <div class="btn btn-secondary">
+          Для пользователей МойСклад
+          <span>бесплатно</span>
+        </div>
+      </div>
     </div>
 
-    <!-- КОММЕРЧЕСКАЯ МОДЕЛЬ -->
-    <div class="section">
-        <h2>Коммерческая модель</h2>
-        <p>
-            OptoVizor является <strong>коммерческим сервисом</strong>. Поставщики подключаются по 
-            подписке, размещают каталог, обновляют прайс-листы, используют аналитику и инструменты 
-            продвижения.
+    <div class="hero-right-card">
+      <div class="hero-right-header">
+        <div class="hero-right-title">Подключение к МойСклад</div>
+        <div class="hero-right-tag">Режим чтения</div>
+      </div>
+      <ul class="hero-step-list">
+        <li>Установите приложение из каталога решений МойСклад.</li>
+        <li>Подтвердите запрошенные права (только просмотр каталога).</li>
+        <li>Откройте пункт <b>«OptoVizor»</b> в боковом меню и пользуйтесь каталогом.</li>
+      </ul>
+      <div class="hero-badge-ai">🤖 ИИ-поиск по товарам внутри каталога</div>
+    </div>
+  </section>
+
+  <!-- ABOUT & MODEL -->
+  <section>
+    <h2 class="section-title">О сервисе OptoVizor</h2>
+    <p class="section-sub">
+      OptoVizor — коммерческая B2B-платформа, объединяющая оптовых поставщиков и розничные компании.
+      Сервис помогает поставщикам управлять каталогом и продвижением, а магазинам — быстро находить нужные товары.
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📦</div>
+          <div class="card-title">Каталог поставщиков</div>
+        </div>
+        <p class="card-text">
+          Поставщики размещают и поддерживают актуальные каталоги, а пользователи МойСклад получают удобный просмотр
+          ассортимента и цен прямо в своей учётной системе.
         </p>
-        <p>
-            Интеграция с <strong>МойСклад</strong> предоставляется пользователям МойСклад бесплатно — как часть 
-            платформы OptoVizor. Интеграция работает только в режиме чтения и не изменяет данные.
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🤖</div>
+          <div class="card-title">Интеллектуальный поиск</div>
+        </div>
+        <p class="card-text">
+          ИИ-поиск помогает находить товары по названию, бренду, ключевым словам и другим признакам, упрощая работу с большим
+          количеством позиций и прайс-листов.
         </p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Управление и аналитика</div>
+        </div>
+        <p class="card-text">
+          Поставщики используют OptoVizor для поддержания актуальности каталога и анализа спроса на свои позиции
+          через внешние интеграции.
+        </p>
+      </div>
     </div>
 
-    <!-- ИНСТРУКЦИЯ -->
-    <div class="section">
-        <h2>Инструкция по подключению OptoVizor к МойСклад</h2>
+    <h2 class="section-title" style="margin-top:32px;">Коммерческая модель</h2>
+    <p class="section-sub">
+      OptoVizor является коммерческим сервисом. Платформа монетизируется за счёт поставщиков, которые размещают свои
+      каталоги и используют дополнительные возможности продвижения.
+    </p>
 
-        <h3>1. Установка приложения</h3>
-        <p>
-            В каталоге приложений МойСклад нажмите кнопку <strong>«Установить»</strong>.  
-            Появится окно с запросом прав доступа. ОптoVizor использует только безопасный режим чтения.
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">💼</div>
+          <div class="card-title">Подписка для поставщиков</div>
+        </div>
+        <p class="card-text">
+          Поставщики подключаются к OptoVizor по подписке: размещают каталог, обновляют прайс-листы и используют доступные
+          сервисы платформы.
         </p>
+      </div>
 
-        <h3>2. Подтверждение прав</h3>
-        <p>
-            Нажмите <strong>«Разрешить»</strong>. Это свяжет ваш аккаунт МойСклад с платформой OptoVizor.
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🔗</div>
+          <div class="card-title">Интеграция для МойСклад</div>
+        </div>
+        <p class="card-text">
+          Интеграция с МойСклад предоставляется пользователям бесплатно как часть платформы OptoVizor и работает
+          только в режиме чтения данных каталога.
         </p>
+      </div>
 
-        <h3>3. Новый раздел в меню</h3>
-        <p>
-            После установки в боковом меню появится раздел <strong>«OptoVizor»</strong>, где откроется каталог поставщиков.
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🧷</div>
+          <div class="card-title">Безопасность данных</div>
+        </div>
+        <p class="card-text">
+          Приложение не создаёт и не изменяет документы в МойСклад. Доступ используется исключительно для чтения
+          информации о товарах и каталоге.
         </p>
+      </div>
+    </div>
+  </section>
 
-        <h3>4. Работа с каталогом</h3>
-        <p>
-            Просматривайте товары поставщиков, используйте ИИ-поиск, фильтры и сравнивайте предложения. 
-            Интеграция работает только в режиме чтения.
+  <!-- INSTRUCTION -->
+  <section>
+    <h2 class="section-title">Инструкция по подключению OptoVizor к МойСклад</h2>
+    <p class="section-sub">
+      Подключение занимает меньше минуты и не требует действий вне интерфейса МойСклад.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Шаг 1</div>
+        <div class="step-title">Установка приложения</div>
+        <p class="step-text">
+          В каталоге приложений МойСклад нажмите кнопку <strong>«Установить»</strong>.
+          После этого откроется окно с запрашиваемыми правами доступа. OptoVizor использует
+          только безопасный режим чтения и не изменяет ваши данные.
         </p>
+      </div>
 
-        <hr>
+      <div class="step">
+        <div class="step-num">Шаг 2</div>
+        <div class="step-title">Подтверждение прав</div>
+        <p class="step-text">
+          Нажмите кнопку <strong>«Разрешить»</strong>. Это свяжет ваш аккаунт МойСклад с платформой OptoVizor.
+          Никакие данные не будут изменены — интеграция работает только в режиме чтения.
+        </p>
+      </div>
 
-        <h3>Дополнительная информация</h3>
-        <ul>
-            <li>Telegram-бот используется только поставщиками для подтверждения каталога.</li>
-            <li>Пользователи МойСклад бот <strong>не используют</strong>.</li>
-            <li>Интеграция ничего не изменяет в данных МойСклад.</li>
-            <li>Каталоги поставщиков обновляются автоматически внутри OptoVizor.</li>
-        </ul>
+      <div class="step">
+        <div class="step-num">Шаг 3</div>
+        <div class="step-title">Раздел OptoVizor в меню</div>
+        <p class="step-text">
+          После установки в боковом меню МойСклад появится новый пункт <strong>«OptoVizor»</strong>.
+          Перейдите в него, чтобы открыть каталог поставщиков.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Шаг 4</div>
+        <div class="step-title">Работа с каталогом</div>
+        <p class="step-text">
+          Используйте ИИ-поиск по товарам, просматривайте цены и наличие, сравнивайте предложения поставщиков.
+          Интеграция работает только в режиме чтения и не вносит изменений в ваши данные МойСклад.
+        </p>
+      </div>
     </div>
 
-    <!-- КОНТАКТЫ -->
-    <div class="section">
-        <h2>Контакты</h2>
-        <p>Email для связи: <strong>shader0630@gmail.com</strong></p>
+    <div class="important">
+      <div class="important-title">Важная информация</div>
+      <ul>
+        <li><strong>Telegram-бот НЕ обязателен</strong> для пользователей МойСклад. Он используется только поставщиками OptoVizor для подтверждения каталога.</li>
+        <li><strong>Интеграция бесплатна</strong> для пользователей с активным доступом к OptoVizor.</li>
+        <li>Приложение <strong>не изменяет и не создаёт данные</strong> в МойСклад, работает только в режиме чтения каталога.</li>
+        <li>Интеграцию можно удалить в один клик в разделе «Приложения» в МойСклад.</li>
+      </ul>
     </div>
 
+    <div class="contacts">
+      Поддержка OptoVizor: <a href="mailto:shader0630@gmail.com">shader0630@gmail.com</a>
+    </div>
+  </section>
 </main>
 
 <footer>
-    OptoVizor · Коммерческая B2B-платформа · 2025
+  OptoVizor · Коммерческая B2B-платформа · Интеграция каталога с МойСклад · 2025
 </footer>
-
 </body>
 </html>
